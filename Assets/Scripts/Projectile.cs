@@ -2,10 +2,5 @@
 using System.Collections;
 
 public class Projectile : MonoBehaviour {
-
-	void Start () {
-	}
-	
-	void Update () {
-	}
+    public Vector2 _speed;
 }
