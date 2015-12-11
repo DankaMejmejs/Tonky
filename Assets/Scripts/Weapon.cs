@@ -9,5 +9,5 @@ public abstract class Weapon : MonoBehaviour {
 	void Update () {
 	}
 
-    public abstract void fire();
+    	public abstract void fire();
 }
