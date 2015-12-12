@@ -115,6 +115,8 @@ public class Tonky : MonoBehaviour {
 
     public void Damage(int damageAmount_, GameObject damagingPlayer_)
     {
+        FMOD_StudioSystem.instance.PlayOneShot("event:/Tank_Shot_Hit", Vector3.zero);
+
         _health -= damageAmount_;
 
         Debug.Log(damageAmount_);
