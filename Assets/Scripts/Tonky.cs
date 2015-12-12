@@ -92,7 +92,7 @@ public class Tonky : MonoBehaviour {
 
         if (magnitude < 1f)
         {
-            _rigidBody.AddForce((transform.up * 2f ) * vec.magnitude * (1.0f - magnitude));
+            _rigidBody.AddForce((transform.up * 5f ) * vec.magnitude * (1.0f - magnitude));
         }
 
         //transform.Rotate(0, 0, Input.GetAxis("Horizontal" + _playerId));
