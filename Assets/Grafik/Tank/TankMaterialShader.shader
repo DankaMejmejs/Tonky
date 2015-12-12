@@ -6,8 +6,6 @@
 		_Color("Color", Color) = (1,1,1,1)
 		_Mask("Mask texture", 2D) = "white" {}
 		[MaterialToggle] PixelSnap("Pixel snap", Float) = 0
-
-		_asd("asd", Range(0, 1)) = 0
 	}
 
 	SubShader
@@ -68,7 +66,6 @@
 			sampler2D _MainTex;
 			sampler2D _Mask;
 			float4 _Color;
-			float _asd;
 
 			fixed4 frag(v2f IN) : COLOR
 			{

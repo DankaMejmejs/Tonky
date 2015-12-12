@@ -22,9 +22,14 @@ public class Tonky : MonoBehaviour {
 
     public AnimationCurve _turnCurve;
 
+    private Material _material;
+
 	// Use this for initialization
 	void Start () {
-       // Health
+        instantiateMaterial();
+        setColor(Color.white);
+
+        // Health
         _maxHealth = 100;
         _health = _maxHealth;
 
@@ -50,7 +55,7 @@ public class Tonky : MonoBehaviour {
 
         // Weeaboopon
         _weapon.tonky = transform.gameObject;
-	}
+    }
 	
 	// Update is called once per frame
 	void Update () {
@@ -143,5 +148,14 @@ public class Tonky : MonoBehaviour {
     void Die(GameObject damagingPlayer_)
     {
         // Skriv skit på skärm'n för fan
+    }
+
+    private void instantiateMaterial() {
+        _material = Instantiate(transform.GetComponent<SpriteRenderer>().material);
+        transform.GetComponent<SpriteRenderer>().material = _material;
+    }
+
+    public void setColor(Color color) {
+        _material.SetColor("_Color", color);
     }
 }
