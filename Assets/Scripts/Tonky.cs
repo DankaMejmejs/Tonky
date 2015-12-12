@@ -22,9 +22,14 @@ public class Tonky : MonoBehaviour {
 
     public AnimationCurve _turnCurve;
 
+    private Material _material;
+
 	// Use this for initialization
 	void Start () {
-       // Health
+        instantiateMaterial();
+        setColor(Color.white);
+
+        // Health
         _maxHealth = 100;
         _health = _maxHealth;
 
@@ -49,8 +54,9 @@ public class Tonky : MonoBehaviour {
         _rigidBody = GetComponent<Rigidbody2D>();
 
         // Weeaboopon
+        _weapon = Instantiate(_weapon);
         _weapon.tonky = transform.gameObject;
-	}
+    }
 	
 	// Update is called once per frame
 	void Update () {
@@ -86,21 +92,22 @@ public class Tonky : MonoBehaviour {
 
         if (magnitude < 1f)
         {
-            _rigidBody.AddForce((transform.up * 2f ) * vec.magnitude * (1.0f - magnitude));
+            _rigidBody.AddForce((transform.up * 5f ) * vec.magnitude * (1.0f - magnitude));
         }
 
         //transform.Rotate(0, 0, Input.GetAxis("Horizontal" + _playerId));
 
         //_rigidBody.AddForce(transform.up * Input.GetAxis("Vertical" + _playerId));
 
-        if (Input.GetButton("Fire1"))
+        _weapon.transform.position = transform.position + transform.up * 0.4f;
+
+        if (Input.GetButton("Fire" + _playerId))
         {
             _weapon.holdFire();
         }
 
-        else if (Input.GetButtonUp("Fire1"))
+        else if (Input.GetButtonUp("Fire" + _playerId))
         {
-            _weapon.transform.position = transform.position;
             _weapon.transform.up = transform.up;
             _weapon.releaseFire();
         }
@@ -143,5 +150,14 @@ public class Tonky : MonoBehaviour {
     void Die(GameObject damagingPlayer_)
     {
         // Skriv skit på skärm'n för fan
+    }
+
+    private void instantiateMaterial() {
+        _material = Instantiate(transform.GetComponent<SpriteRenderer>().material);
+        transform.GetComponent<SpriteRenderer>().material = _material;
+    }
+
+    public void setColor(Color color) {
+        _material.SetColor("_Color", color);
     }
 }
