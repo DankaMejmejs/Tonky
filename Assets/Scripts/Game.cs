@@ -35,10 +35,10 @@ public class Game : MonoBehaviour {
         _players = 0;
         for (int i = 0; i < 3; i++)
         {
-            GameObject go = Instantiate(_tonky);
-            go.GetComponent<Tonky>()._playerId = _players;
-            _players++;
+            AddPlayer();
         }
+        GameObject go = Instantiate(_hud);
+        go.GetComponent<ScoreTracker>().Initiliaize(_players);
 	}
 	
 	// Update is called once per frame
@@ -51,7 +51,7 @@ public class Game : MonoBehaviour {
     {
         GameObject go = GameObject.Instantiate(_tonky);
         go.GetComponent<Tonky>()._playerId = _players;
-        go.transform.position = _spawnpoints[_players].transform.position;
+        //go.transform.position = _spawnpoints[_players].transform.position;
         _players++;
     }
 }
