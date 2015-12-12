@@ -20,6 +20,8 @@ public class Tonky : MonoBehaviour {
     // Jesper, kodar vapen på Höga-Berget...
     public Weapon _weapon;
 
+    public AnimationCurve _turnCurve;
+
 	// Use this for initialization
 	void Start () {
        // Health
@@ -55,15 +57,19 @@ public class Tonky : MonoBehaviour {
         
        
         Vector3 vec = new Vector3(Input.GetAxis("Horizontal" + _playerId), -Input.GetAxis("Vertical" + _playerId),0);
-        transform.up = Vector3.Lerp(transform.up, vec, 0.01f);
         Debug.DrawRay(transform.position, transform.up);
 
         Vector3 delta = vec - transform.up;
         float magnitude = delta.magnitude;
 
+        // Fucking fuck this shit
+        //float d = ((magnitude) / Mathf.PI);
+        //transform.up = Vector3.Lerp(transform.up, vec, _turnCurve.Evaluate(1 - ((magnitude) / Mathf.PI)) * 0.1f);
+        transform.up = Vector3.Lerp(transform.up, vec, 0.01f);
+
         if (magnitude < 1f)
         {
-            _rigidBody.AddForce((transform.up * 2f ) * vec.magnitude * (1.0f-magnitude));
+            _rigidBody.AddForce((transform.up * 2f ) * vec.magnitude * (1.0f - magnitude));
         }
 
         //transform.Rotate(0, 0, Input.GetAxis("Horizontal" + _playerId));
