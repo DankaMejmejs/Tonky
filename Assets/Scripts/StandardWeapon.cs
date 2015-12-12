@@ -19,11 +19,11 @@ public class StandardWeapon : Weapon {
     public override void releaseFire() {
         GameObject newG = Instantiate(projectilePrototype);
         newG.transform.position = transform.position;
-        newG.GetComponent<Projectile>()._speed = transform.up * (holdTimer + 1) * 0.5f;
-        holdTimer = 0;
+        newG.GetComponent<Projectile>()._speed = transform.up * ((holdTimer * holdTimer * 10) + 1);
+        newG.GetComponent<Projectile>()._owner = tonky;
 
         //Add force to tank
-        tonky.GetComponent<Rigidbody2D>().AddForce(-tonky.transform.up * (holdTimer + 1) * 0.5f);
-        newG.GetComponent<Projectile>()._owner = tonky;
+        tonky.GetComponent<Rigidbody2D>().AddForce(-tonky.transform.up * ((holdTimer * holdTimer * 500) + 1));
+        holdTimer = 0;
     }
 }
