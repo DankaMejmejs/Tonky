@@ -12,14 +12,12 @@ public class StandardProjectile : Projectile {
 
     void OnCollisionEnter2D(Collision2D collision)
     {
-        Debug.Log("Swag");
-
         Tonky tonky = collision.gameObject.GetComponent<Tonky>();
 
         if (tonky != null)
         {
-            tonky.GetComponent<Rigidbody2D>().AddForce(-tonky.transform.up * _speed.magnitude * _speed.magnitude * 100);
-            Destroy(this.gameObject);
+            tonky.GetComponent<Rigidbody2D>().AddForce(_speed * _speed.magnitude * 10);
+            Destroy(gameObject);
         }
     }
 }

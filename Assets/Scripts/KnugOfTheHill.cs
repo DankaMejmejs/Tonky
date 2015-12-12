@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
-
+using System.Collections.Generic;
 
 public class KnugOfTheHill : MonoBehaviour {
     public float radius;
@@ -9,7 +9,7 @@ public class KnugOfTheHill : MonoBehaviour {
     
     private CircleCollider2D _collider;
     public GameObject _owner;
-    
+    public List<GameObject> _inside;
    
 	// Use this for initialization
 	void Start () {
@@ -34,14 +34,36 @@ public class KnugOfTheHill : MonoBehaviour {
 
     void OnTriggerEnter2D(Collider2D col)
     {
-        
-        if(_owner == null)
+        if (col.gameObject.name.Contains("Tonky"))
         {
-            if(col.gameObject.name.Contains("Tonky"))
+            if (_owner == null)
             {
                 _owner = col.gameObject;
-                Debug.Log("HEllo");
+            }
+            _inside.Add(col.gameObject);
+        }
+        
+    }
+
+    void OnTriggerExit2D(Collider2D col)
+    {
+        if (col.gameObject.name.Contains("Tonky"))
+        {
+            _inside.Remove(col.gameObject);
+            if (col.gameObject == _owner)
+            {
+                if (_inside.Count > 1)
+                {
+                    _owner = _inside[Random.Range(0, _inside.Count + 1)];
+                }
+                else
+                {
+                    _owner = null;
+                }
+                    
             }
         }
+        
+       
     }
 }
