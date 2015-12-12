@@ -28,9 +28,12 @@ public class Game : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
         _players = 0;
-        GameObject go = Instantiate(_tonky);
-        go.GetComponent<Tonky>()._playerId = _players;
-        _players++;
+        for (int i = 0; i < 3; i++)
+        {
+            GameObject go = Instantiate(_tonky);
+            go.GetComponent<Tonky>()._playerId = _players;
+            _players++;
+        }
 	}
 	
 	// Update is called once per frame

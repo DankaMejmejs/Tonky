@@ -24,7 +24,6 @@ public class KnugOfTheHill : MonoBehaviour {
 
     void OnTriggerEnter2D(Collider2D col)
     {
-        Debug.Log("HEllo");
         if(_owner == null)
         {
             if(col.gameObject.name.Contains("Tonky"))
