@@ -1,8 +1,8 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class KnugoftheHill : MonoBehaviour {
-
+public class KnugOfTheHill : MonoBehaviour {
+    public float radius;
 	// Use this for initialization
 	void Start () {
 	
