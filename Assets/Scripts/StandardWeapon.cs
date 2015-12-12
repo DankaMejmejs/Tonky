@@ -24,5 +24,6 @@ public class StandardWeapon : Weapon {
 
         //Add force to tank
         tonky.GetComponent<Rigidbody2D>().AddForce(-tonky.transform.up * (holdTimer + 1) * 0.5f);
+        newG.GetComponent<Projectile>()._owner = tonky;
     }
 }
