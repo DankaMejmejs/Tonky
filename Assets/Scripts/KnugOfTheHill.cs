@@ -42,11 +42,8 @@ public class KnugOfTheHill : MonoBehaviour {
             {
                 _owner = col.gameObject;
                 GameObject go = Instantiate(_crown, new Vector3(), _owner.transform.rotation) as GameObject;
-                Debug.Log(go.transform.position + " " + _owner.transform.up);
                 go.transform.parent = _owner.transform;
-
                 go.transform.localPosition = new Vector3(0, 1, 0);
-                Debug.Log(go.transform.position);
 
             }
             _inside.Add(col.gameObject);

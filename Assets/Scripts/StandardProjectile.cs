@@ -7,7 +7,7 @@ public class StandardProjectile : Projectile {
 	}
 	
 	void Update () {
-        transform.position += new Vector3(_speed.x, _speed.y, 0) * Time.deltaTime;
+        //transform.position += new Vector3(_speed.x, _speed.y, 0) * Time.deltaTime;
 	}
 
     void OnCollisionEnter2D(Collision2D collision)
