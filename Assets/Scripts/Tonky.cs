@@ -117,6 +117,8 @@ public class Tonky : MonoBehaviour {
     {
         _health -= damageAmount_;
 
+        Debug.Log(damageAmount_);
+
         // Skriv ut damage eller någon skit
 
         if (_health <= 0)
@@ -150,6 +152,7 @@ public class Tonky : MonoBehaviour {
     void Die(GameObject damagingPlayer_)
     {
         // Skriv skit på skärm'n för fan
+        Debug.Log("Ded");
     }
 
     private void instantiateMaterial() {
