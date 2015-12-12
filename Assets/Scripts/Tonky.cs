@@ -9,7 +9,6 @@ public class Tonky : MonoBehaviour {
 
     // Identification
     public int _playerId;
-    public string _playerName;
     
     // Physics
     private Rigidbody2D _rigidBody;
@@ -20,6 +19,8 @@ public class Tonky : MonoBehaviour {
 
     // Jesper, kodar vapen på Höga-Berget...
     public Weapon _weapon;
+
+    public AnimationCurve _turnCurve;
 
 	// Use this for initialization
 	void Start () {
@@ -56,31 +57,39 @@ public class Tonky : MonoBehaviour {
         
        
         Vector3 vec = new Vector3(Input.GetAxis("Horizontal" + _playerId), -Input.GetAxis("Vertical" + _playerId),0);
-        transform.up = Vector3.Lerp(transform.up, vec, 0.01f);
         Debug.DrawRay(transform.position, transform.up);
 
-       if((vec - transform.up).magnitude < 1f)
-       {
-           _rigidBody.AddForce((transform.up * 2f ) * vec.magnitude);
-       }
+        Vector3 delta = vec - transform.up;
+        float magnitude = delta.magnitude;
+
+        // Fucking fuck this shit
+        //float d = ((magnitude) / Mathf.PI);
+        //transform.up = Vector3.Lerp(transform.up, vec, _turnCurve.Evaluate(1 - ((magnitude) / Mathf.PI)) * 0.1f);
+        transform.up = Vector3.Lerp(transform.up, vec, 0.01f);
+
+        if (magnitude < 1f)
+        {
+            _rigidBody.AddForce((transform.up * 2f ) * vec.magnitude * (1.0f - magnitude));
+        }
 
         //transform.Rotate(0, 0, Input.GetAxis("Horizontal" + _playerId));
 
         //_rigidBody.AddForce(transform.up * Input.GetAxis("Vertical" + _playerId));
 
-        if (Input.GetButtonDown("Fire1"))
+        if (Input.GetButton("Fire1"))
         {
             _weapon.holdFire();
         }
 
         else if (Input.GetButtonUp("Fire1"))
         {
+            _weapon.transform.position = transform.position;
             _weapon.transform.up = transform.up;
             _weapon.releaseFire();
         }
 	}
 
-    public void Damage(int damageAmount_, string damagingPlayerName_)
+    public void Damage(int damageAmount_, GameObject damagingPlayer_)
     {
         _health -= damageAmount_;
 
@@ -88,7 +97,7 @@ public class Tonky : MonoBehaviour {
 
         if (_health <= 0)
         {
-            Die(damagingPlayerName_);
+            Die(damagingPlayer_);
         }
     }
 
@@ -114,7 +123,7 @@ public class Tonky : MonoBehaviour {
         _health = _maxHealth;
     }
 
-    void Die(string playerName_)
+    void Die(GameObject damagingPlayer_)
     {
         // Skriv skit på skärm'n för fan
     }
