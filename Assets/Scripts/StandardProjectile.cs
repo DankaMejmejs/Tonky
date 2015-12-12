@@ -7,7 +7,7 @@ public class StandardProjectile : Projectile {
 	}
 	
 	void Update () {
-        transform.position += new Vector3(_speed.x, _speed.y, 0) * Time.deltaTime;
+
 	}
 
     void OnCollisionEnter2D(Collision2D collision)
@@ -16,7 +16,7 @@ public class StandardProjectile : Projectile {
 
         if (tonky != null)
         {
-            tonky.GetComponent<Rigidbody2D>().AddForce(_speed * _speed.magnitude * 2);
+            tonky.Damage(Mathf.FloorToInt(Mathf.FloorToInt(GetComponent<Rigidbody2D>().velocity.magnitude / 4)), _owner);
             Destroy(gameObject);
         }
     }
