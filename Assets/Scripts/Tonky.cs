@@ -12,14 +12,14 @@ public class Tonky : MonoBehaviour {
     public string _playerName;
     
     // Physics
-    Rigidbody2D _rigidBody;
+    private Rigidbody2D _rigidBody;
 
     // Sprite
-    SpriteRenderer _spriteRenderer;
-    Sprite _sprite;
+    private SpriteRenderer _spriteRenderer;
+    public Sprite[] _sprite;
 
     // Jesper, kodar vapen på Höga-Berget...
-    Weapon _weapon;
+    public Weapon _weapon;
 
 	// Use this for initialization
 	void Start () {
@@ -39,8 +39,12 @@ public class Tonky : MonoBehaviour {
         {
             Debug.Log("No sprite");
         }
+        else 
+        {
+            _spriteRenderer.sprite = Game.Instance._playerSprites[_playerId];
+        }
 
-        _spriteRenderer.sprite = _sprite;
+        
 
         // Physics
         _rigidBody = GetComponent<Rigidbody2D>();
@@ -61,10 +65,10 @@ public class Tonky : MonoBehaviour {
         //    y =;
         //}
         Vector3 vec = new Vector3(Input.GetAxis("Horizontal" + _playerId), -Input.GetAxis("Vertical" + _playerId),0);
-        transform.up = Vector3.Lerp(transform.up, vec, 0.05f);
+        transform.up = Vector3.Lerp(transform.up, vec, 0.01f);
         Debug.DrawRay(transform.position, transform.up);
 
-       if((vec - transform.up).magnitude < 2f)
+       if((vec - transform.up).magnitude < 1f)
        {
            _rigidBody.AddForce((transform.up * 2f ) * vec.magnitude);
        }
