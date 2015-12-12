@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<objects serializationModel="Studio.01.05.00">
+    <object class="AudioFile" id="{e76c5be2-c108-4a85-b4e2-b8ed48f6cf82}">
+        <property name="frequencyInKHz">
+            <value>48</value>
+        </property>
+        <property name="channelCount">
+            <value>2</value>
+        </property>
+        <property name="length">
+            <value>1.3485208333333334</value>
+        </property>
+        <property name="audioFilePath">
+            <value>$(AUDIO_BIN_DIR)/SFX_Tank_Shot_004 {15d23cda-c43f-40a5-9338-7602ab47f933}.wav</value>
+        </property>
+        <relationship name="container">
+            <destination>{fd5808fb-8fd3-4996-81e2-c0166735c8ab}</destination>
+        </relationship>
+    </object>
+</objects>

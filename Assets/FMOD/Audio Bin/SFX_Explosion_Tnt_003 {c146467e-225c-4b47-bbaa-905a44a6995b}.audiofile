@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<objects serializationModel="Studio.01.05.00">
+    <object class="AudioFile" id="{c146467e-225c-4b47-bbaa-905a44a6995b}">
+        <property name="frequencyInKHz">
+            <value>48</value>
+        </property>
+        <property name="channelCount">
+            <value>2</value>
+        </property>
+        <property name="length">
+            <value>1.2775208333333334</value>
+        </property>
+        <property name="audioFilePath">
+            <value>$(AUDIO_BIN_DIR)/SFX_Explosion_Tnt_003 {f3fc3a42-ebd7-458e-bac2-31a45ea7f4f8}.wav</value>
+        </property>
+        <relationship name="container">
+            <destination>{fd5808fb-8fd3-4996-81e2-c0166735c8ab}</destination>
+        </relationship>
+    </object>
+</objects>
