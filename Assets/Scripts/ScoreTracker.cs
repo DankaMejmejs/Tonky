@@ -6,6 +6,7 @@ public class ScoreTracker : MonoBehaviour {
 
     public int[] _scores;
     public Text[] _texts;
+    
 
     private static ScoreTracker _instance = null;
 
