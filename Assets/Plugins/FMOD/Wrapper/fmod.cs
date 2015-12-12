@@ -1,18 +1,12 @@
 /* ========================================================================================== */
 /*                                                                                            */
-/* FMOD Studio - C# Wrapper . Copyright (c), Firelight Technologies Pty, Ltd. 2004-2015.          */
+/* FMOD Studio - C# Wrapper . Copyright (c), Firelight Technologies Pty, Ltd. 2004-2015.      */
 /*                                                                                            */
 /* ========================================================================================== */
-
-#if UNITY_EDITOR || ((UNITY_STANDALONE_WIN || UNITY_STANDALONE_OSX) && DEVELOPMENT_BUILD)
-#define FMOD_LOGGING
-#endif
 
 using System;
 using System.Text;
 using System.Runtime.InteropServices;
-
-
 
 namespace FMOD
 {
@@ -31,7 +25,7 @@ namespace FMOD
         public const string dll    = "libfmodstudio";
 #elif (UNITY_WIIU) && !UNITY_EDITOR
         public const string dll    = "libfmodstudio";
-#elif UNITY_EDITOR || ((UNITY_STANDALONE_WIN || UNITY_STANDALONE_OSX) && DEVELOPMENT_BUILD)
+#elif (UNITY_EDITOR || UNITY_STANDALONE_WIN || UNITY_STANDALONE_OSX) && FMOD_DEBUG
         public const string dll    = "fmodl";
 #else
         public const string dll    = "fmod";
@@ -218,10 +212,10 @@ namespace FMOD
     [StructLayout(LayoutKind.Sequential)]
     public struct ATTRIBUTES_3D
     {
-        public VECTOR position;
-        public VECTOR velocity;
-        public VECTOR forward;
-        public VECTOR up;
+        VECTOR position;
+        VECTOR velocity;
+        VECTOR forward;
+        VECTOR up;
     }
 
     /*
@@ -1990,10 +1984,6 @@ namespace FMOD
         {
             return FMOD5_System_GetChannelsPlaying(rawPtr, out channels);
         }
-        public RESULT getChannelsReal        (out int channels)
-        {
-            return FMOD5_System_GetChannelsReal(rawPtr, out channels);
-        }
         public RESULT getCPUUsage            (out float dsp, out float stream, out float geometry, out float update, out float total)
         {
             return FMOD5_System_GetCPUUsage(rawPtr, out dsp, out stream, out geometry, out update, out total);
@@ -2417,8 +2407,6 @@ namespace FMOD
         private static extern RESULT FMOD5_System_GetOutputHandle        (IntPtr system, out IntPtr handle);
         [DllImport(VERSION.dll)]
         private static extern RESULT FMOD5_System_GetChannelsPlaying     (IntPtr system, out int channels);
-        [DllImport(VERSION.dll)]
-        private static extern RESULT FMOD5_System_GetChannelsReal         (IntPtr system, out int channels);
         [DllImport(VERSION.dll)]
         private static extern RESULT FMOD5_System_GetCPUUsage            (IntPtr system, out float dsp, out float stream, out float geometry, out float update, out float total);
         [DllImport(VERSION.dll)]
@@ -3743,13 +3731,13 @@ namespace FMOD
         {
             return FMOD5_DSP_GetBypass(rawPtr, out bypass);
         }
-        public RESULT setWetDryMix(float prewet, float postwet, float dry)
+        public RESULT setWetDryMix(float wet, float dry)
         {
-            return FMOD5_DSP_SetWetDryMix(rawPtr, prewet, postwet, dry);
+            return FMOD5_DSP_SetWetDryMix(rawPtr, wet, dry);
         }
-        public RESULT getWetDryMix(out float prewet, out float postwet, out float dry)
+        public RESULT getWetDryMix(out float wet, out float dry)
         {
-            return FMOD5_DSP_GetWetDryMix(rawPtr, out prewet, out postwet, out dry);
+            return FMOD5_DSP_GetWetDryMix(rawPtr, out wet, out dry);
         }
         public RESULT setChannelFormat(CHANNELMASK channelmask, int numchannels, SPEAKERMODE source_speakermode)
         {
@@ -3906,9 +3894,9 @@ namespace FMOD
         [DllImport(VERSION.dll)]
         private static extern RESULT FMOD5_DSP_GetBypass                 (IntPtr dsp, out bool bypass);
         [DllImport(VERSION.dll)]
-        private static extern RESULT FMOD5_DSP_SetWetDryMix              (IntPtr dsp, float prewet, float postwet, float dry);
+        private static extern RESULT FMOD5_DSP_SetWetDryMix              (IntPtr dsp, float wet, float dry);
         [DllImport(VERSION.dll)]
-        private static extern RESULT FMOD5_DSP_GetWetDryMix              (IntPtr dsp, out float prewet, out float postwet, out float dry);
+        private static extern RESULT FMOD5_DSP_GetWetDryMix              (IntPtr dsp, out float wet, out float dry);
         [DllImport(VERSION.dll)]
         private static extern RESULT FMOD5_DSP_SetChannelFormat          (IntPtr dsp, CHANNELMASK channelmask, int numchannels, SPEAKERMODE source_speakermode);
         [DllImport(VERSION.dll)]

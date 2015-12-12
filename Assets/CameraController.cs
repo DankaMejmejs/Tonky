@@ -7,6 +7,8 @@ public class CameraController : MonoBehaviour {
     float shakeTime = 0;
     float shakeMax = 0;
     float shakeMin = 0;
+    
+    
 
     void Start () {
 	}

@@ -14,7 +14,7 @@
             <destination>{7c9acdfe-14ad-4b98-8145-0291cc0de93a}</destination>
         </relationship>
         <relationship name="mixerInput">
-            <destination>{b96a3267-a4e3-421b-b166-7f30770b6921}</destination>
+            <destination>{7991413a-71fd-4e84-a578-2c2b13785841}</destination>
         </relationship>
         <relationship name="automatableProperties">
             <destination>{031454ca-49ed-4e9e-83cb-48404eedfdc1}</destination>
@@ -45,12 +45,12 @@
             <destination>{084c09f0-d7bc-485a-b474-4acf4e08459f}</destination>
         </relationship>
     </object>
-    <object class="MixerInput" id="{b96a3267-a4e3-421b-b166-7f30770b6921}">
+    <object class="MixerInput" id="{7991413a-71fd-4e84-a578-2c2b13785841}">
         <relationship name="effectChain">
-            <destination>{9634c5ef-4036-42d9-abba-325fa9bf361e}</destination>
+            <destination>{45357807-884a-4bfb-bd11-5261c7cc8bee}</destination>
         </relationship>
         <relationship name="panner">
-            <destination>{2f258ff7-e147-4dd5-a3c8-91facb0ce490}</destination>
+            <destination>{f445205c-5d5d-4934-84d3-54e624b2db92}</destination>
         </relationship>
         <relationship name="output">
             <destination>{bcbf94d4-2258-42be-b7fc-29de8058f254}</destination>
@@ -86,12 +86,12 @@
             <destination>{39bebdbf-a0ca-417f-8044-d55803bcb9b2}</destination>
         </relationship>
     </object>
-    <object class="MixerBusEffectChain" id="{9634c5ef-4036-42d9-abba-325fa9bf361e}">
+    <object class="MixerBusEffectChain" id="{45357807-884a-4bfb-bd11-5261c7cc8bee}">
         <relationship name="effects">
-            <destination>{97aee6e4-bad1-4e00-b72a-06517bf0b9df}</destination>
+            <destination>{56da5e34-5c7c-42c6-b973-eaa05249f129}</destination>
         </relationship>
     </object>
-    <object class="MixerBusPanner" id="{2f258ff7-e147-4dd5-a3c8-91facb0ce490}"/>
+    <object class="MixerBusPanner" id="{f445205c-5d5d-4934-84d3-54e624b2db92}"/>
     <object class="MultiSound" id="{2ad612eb-5591-4833-8bd8-387415c228ca}">
         <property name="length">
             <value>2</value>
@@ -129,7 +129,7 @@
         </relationship>
     </object>
     <object class="MixerBusPanner" id="{17a96072-7d7a-420b-a124-f327346eaf1f}"/>
-    <object class="MixerBusFader" id="{97aee6e4-bad1-4e00-b72a-06517bf0b9df}"/>
+    <object class="MixerBusFader" id="{56da5e34-5c7c-42c6-b973-eaa05249f129}"/>
     <object class="SingleSound" id="{07a45ec6-e8ef-4446-a696-17ba0c6b590a}">
         <property name="voiceStealing">
             <value>3</value>
