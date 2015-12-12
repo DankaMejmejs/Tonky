@@ -10,6 +10,5 @@ public class KnugOfTheHill : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-	
 	}
 }

@@ -44,10 +44,11 @@ public class Tonky : MonoBehaviour {
             _spriteRenderer.sprite = Game.Instance._playerSprites[_playerId];
         }
 
-        
-
         // Physics
         _rigidBody = GetComponent<Rigidbody2D>();
+
+        // Weeaboopon
+        _weapon.tonky = transform.gameObject;
 	}
 	
 	// Update is called once per frame
@@ -62,7 +63,21 @@ public class Tonky : MonoBehaviour {
        {
            _rigidBody.AddForce((transform.up * 2f ) * vec.magnitude);
        }
-        
+
+        //transform.Rotate(0, 0, Input.GetAxis("Horizontal" + _playerId));
+
+        //_rigidBody.AddForce(transform.up * Input.GetAxis("Vertical" + _playerId));
+
+        if (Input.GetButtonDown("Fire1"))
+        {
+            _weapon.holdFire();
+        }
+
+        else if (Input.GetButtonUp("Fire1"))
+        {
+            _weapon.transform.up = transform.up;
+            _weapon.releaseFire();
+        }
 	}
 
     public void Damage(int damageAmount_, string damagingPlayerName_)
