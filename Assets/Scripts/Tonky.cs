@@ -59,16 +59,19 @@ public class Tonky : MonoBehaviour {
         transform.up = Vector3.Lerp(transform.up, vec, 0.01f);
         Debug.DrawRay(transform.position, transform.up);
 
-       if((vec - transform.up).magnitude < 1f)
-       {
-           _rigidBody.AddForce((transform.up * 2f ) * vec.magnitude);
-       }
+        Vector3 delta = vec - transform.up;
+        float magnitude = delta.magnitude;
+
+        if (magnitude < 1f)
+        {
+            _rigidBody.AddForce((transform.up * 2f ) * vec.magnitude * (1.0f-magnitude));
+        }
 
         //transform.Rotate(0, 0, Input.GetAxis("Horizontal" + _playerId));
 
         //_rigidBody.AddForce(transform.up * Input.GetAxis("Vertical" + _playerId));
 
-        if (Input.GetButtonDown("Fire1"))
+        if (Input.GetButton("Fire1"))
         {
             _weapon.holdFire();
         }
