@@ -58,14 +58,31 @@ public class Tonky : MonoBehaviour {
        
         Vector3 vec = new Vector3(Input.GetAxis("Horizontal" + _playerId), -Input.GetAxis("Vertical" + _playerId),0);
         Debug.DrawRay(transform.position, transform.up);
+        Debug.DrawRay(transform.position, vec, Color.red);
 
         Vector3 delta = vec - transform.up;
         float magnitude = delta.magnitude;
 
-        // Fucking fuck this shit
+        float a1 = Mathf.Atan2(vec.y, vec.x);
+        float a2 = Mathf.Atan2(transform.up.y, transform.up.x);
+        /*
+        float a = 0;
+        if (vec.sqrMagnitude > 0) {
+            a = (((a1 - a2) + 180) % 360 - 180);
+            transform.Rotate(new Vector3(0, 0, 1), Mathf.Sign(a) * 1);
+            Debug.Log(Mathf.Sign(a));
+        }
+        */
+
+        float a = Mathf.Atan2(Mathf.Sin(a1 - a2), Mathf.Cos(a1 - a2));
+        if (vec.sqrMagnitude > 0)
+            transform.Rotate(new Vector3(0, 0, 1), Mathf.Sign(a) * _turnCurve.Evaluate(1 - (Mathf.Abs(a) / 2 * Mathf.PI)));
+
+
+        // §ucking fuck this shit
         //float d = ((magnitude) / Mathf.PI);
         //transform.up = Vector3.Lerp(transform.up, vec, _turnCurve.Evaluate(1 - ((magnitude) / Mathf.PI)) * 0.1f);
-        transform.up = Vector3.Lerp(transform.up, vec, 0.01f);
+        //transform.up = Vector3.Lerp(transform.up, vec, 0.01f);
 
         if (magnitude < 1f)
         {
