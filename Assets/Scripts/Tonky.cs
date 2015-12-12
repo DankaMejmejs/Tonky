@@ -54,6 +54,7 @@ public class Tonky : MonoBehaviour {
         _rigidBody = GetComponent<Rigidbody2D>();
 
         // Weeaboopon
+        _weapon = Instantiate(_weapon);
         _weapon.tonky = transform.gameObject;
     }
 	
@@ -98,14 +99,15 @@ public class Tonky : MonoBehaviour {
 
         //_rigidBody.AddForce(transform.up * Input.GetAxis("Vertical" + _playerId));
 
-        if (Input.GetButton("Fire1"))
+        _weapon.transform.position = transform.position + transform.up * 0.4f;
+
+        if (Input.GetButton("Fire" + _playerId))
         {
             _weapon.holdFire();
         }
 
-        else if (Input.GetButtonUp("Fire1"))
+        else if (Input.GetButtonUp("Fire" + _playerId))
         {
-            _weapon.transform.position = transform.position;
             _weapon.transform.up = transform.up;
             _weapon.releaseFire();
         }

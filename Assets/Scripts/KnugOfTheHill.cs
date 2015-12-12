@@ -34,7 +34,6 @@ public class KnugOfTheHill : MonoBehaviour {
 
     void OnTriggerEnter2D(Collider2D col)
     {
-
         if (col.gameObject.name.Contains("Tonky"))
         {
             if (_owner == null)

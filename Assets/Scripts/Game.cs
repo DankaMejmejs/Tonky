@@ -33,11 +33,12 @@ public class Game : MonoBehaviour {
 
         Instantiate(_knug);
         _players = 0;
-
-        AddPlayer();
-
-        GameObject go1 = Instantiate(_hud);
-        go1.GetComponent<ScoreTracker>().Initiliaize(_players);
+        for (int i = 0; i < 3; i++)
+        {
+            GameObject go = Instantiate(_tonky);
+            go.GetComponent<Tonky>()._playerId = _players;
+            _players++;
+        }
 	}
 	
 	// Update is called once per frame
