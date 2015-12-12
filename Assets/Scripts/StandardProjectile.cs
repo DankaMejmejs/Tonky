@@ -16,7 +16,7 @@ public class StandardProjectile : Projectile {
 
         if (tonky != null)
         {
-            tonky.GetComponent<Rigidbody2D>().AddForce(_speed * _speed.magnitude * 10);
+            tonky.GetComponent<Rigidbody2D>().AddForce(_speed * _speed.magnitude * 2);
             Destroy(gameObject);
         }
     }
