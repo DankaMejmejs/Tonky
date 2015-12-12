@@ -4,6 +4,9 @@ using System.Collections;
 public class Game : MonoBehaviour {
 
     public GameObject _tonky;
+    public GameObject _hud;
+    public GameObject _knug;
+    public GameObject[] _spawnpoints;
     public Sprite[] _playerSprites;
     private int _players;
 
@@ -27,6 +30,8 @@ public class Game : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
+
+        Instantiate(_knug);
         _players = 0;
         for (int i = 0; i < 3; i++)
         {
@@ -40,4 +45,13 @@ public class Game : MonoBehaviour {
 	void Update () {
 	    
 	}
+
+    //Private function to add a player 
+    private void AddPlayer()
+    {
+        GameObject go = GameObject.Instantiate(_tonky);
+        go.GetComponent<Tonky>()._playerId = _players;
+        go.transform.position = _spawnpoints[_players].transform.position;
+        _players++;
+    }
 }
