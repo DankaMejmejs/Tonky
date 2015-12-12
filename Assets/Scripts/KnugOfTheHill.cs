@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 
 public class KnugOfTheHill : MonoBehaviour {
     public float radius;
@@ -10,6 +11,7 @@ public class KnugOfTheHill : MonoBehaviour {
     private CircleCollider2D _collider;
     public GameObject _owner;
     public List<GameObject> _inside;
+    public GameObject _crown;
    
 	// Use this for initialization
 	void Start () {
@@ -39,6 +41,13 @@ public class KnugOfTheHill : MonoBehaviour {
             if (_owner == null)
             {
                 _owner = col.gameObject;
+                GameObject go = Instantiate(_crown, new Vector3(), _owner.transform.rotation) as GameObject;
+                Debug.Log(go.transform.position + " " + _owner.transform.up);
+                go.transform.parent = _owner.transform;
+
+                go.transform.localPosition = new Vector3(0, 1, 0);
+                Debug.Log(go.transform.position);
+
             }
             _inside.Add(col.gameObject);
         }
@@ -52,6 +61,7 @@ public class KnugOfTheHill : MonoBehaviour {
             _inside.Remove(col.gameObject);
             if (col.gameObject == _owner)
             {
+                Destroy(_owner.GetComponentsInChildren<Transform>().FirstOrDefault(x => x.name.Contains("KnugCrown")).gameObject);
                 if (_inside.Count > 1)
                 {
                     _owner = _inside[Random.Range(0, _inside.Count + 1)];
