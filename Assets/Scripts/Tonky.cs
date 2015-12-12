@@ -9,7 +9,6 @@ public class Tonky : MonoBehaviour {
 
     // Identification
     public int _playerId;
-    public string _playerName;
     
     // Physics
     private Rigidbody2D _rigidBody;
@@ -90,7 +89,7 @@ public class Tonky : MonoBehaviour {
         }
 	}
 
-    public void Damage(int damageAmount_, string damagingPlayerName_)
+    public void Damage(int damageAmount_, GameObject damagingPlayer_)
     {
         _health -= damageAmount_;
 
@@ -98,7 +97,7 @@ public class Tonky : MonoBehaviour {
 
         if (_health <= 0)
         {
-            Die(damagingPlayerName_);
+            Die(damagingPlayer_);
         }
     }
 
@@ -124,7 +123,7 @@ public class Tonky : MonoBehaviour {
         _health = _maxHealth;
     }
 
-    void Die(string playerName_)
+    void Die(GameObject damagingPlayer_)
     {
         // Skriv skit på skärm'n för fan
     }
