@@ -75,6 +75,7 @@ public class Tonky : MonoBehaviour {
 
         else if (Input.GetButtonUp("Fire1"))
         {
+            _weapon.transform.position = transform.position;
             _weapon.transform.up = transform.up;
             _weapon.releaseFire();
         }
