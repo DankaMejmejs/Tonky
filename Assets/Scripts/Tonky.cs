@@ -1,5 +1,6 @@
 ﻿﻿using UnityEngine;
 using System.Collections;
+using UnityEngine.UI;
 
 public class Tonky : MonoBehaviour {
 
@@ -23,6 +24,8 @@ public class Tonky : MonoBehaviour {
     public AnimationCurve _turnCurve;
 
     private Material _material;
+    public Image _healthBar;
+    private Material _healthBarMaterial;
 
 	// Use this for initialization
 	void Start () {
@@ -56,12 +59,15 @@ public class Tonky : MonoBehaviour {
         // Weeaboopon
         _weapon = Instantiate(_weapon);
         _weapon.tonky = transform.gameObject;
+
+        instantiateMaterial();
+        setColor(Color.white);
     }
 	
 	// Update is called once per frame
 	void Update () {
-        
-       
+        _healthBarMaterial.SetFloat("_Cutoff", 1 - ((float) _health / (float) _maxHealth));
+
         Vector3 vec = new Vector3(Input.GetAxis("Horizontal" + _playerId), -Input.GetAxis("Vertical" + _playerId),0);
         Debug.DrawRay(transform.position, transform.up);
         Debug.DrawRay(transform.position, vec, Color.red);
@@ -119,7 +125,7 @@ public class Tonky : MonoBehaviour {
 
         _health -= damageAmount_;
 
-        Debug.Log(damageAmount_);
+        //Debug.Log(damageAmount_);
 
         // Skriv ut damage eller någon skit
 
@@ -160,6 +166,9 @@ public class Tonky : MonoBehaviour {
     private void instantiateMaterial() {
         _material = Instantiate(transform.GetComponent<SpriteRenderer>().material);
         transform.GetComponent<SpriteRenderer>().material = _material;
+
+        _healthBarMaterial = Instantiate(_healthBar.material);
+        _healthBar.material = _healthBarMaterial;
     }
 
     public void setColor(Color color) {
