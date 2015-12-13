@@ -7,15 +7,21 @@ public class CameraController : MonoBehaviour {
     float shakeTime = 0;
     float shakeMax = 0;
     float shakeMin = 0;
-    
-    
+
+    public float transitionLevel = 1;
+    float targetTransition = 1;
+
+    FMOD.Studio.EventInstance music;
 
     void Start () {
-		FMOD_StudioSystem.instance.PlayOneShot("event:/Music", Vector3.zero);
-	}
+        music = FMOD_StudioSystem.instance.GetEvent("event:/Music");
+        music.start();
+    }
 	
 	void Update () {
-	}
+        transitionLevel = targetTransition;
+        music.setParameterValue("Transition", transitionLevel);
+    }
 
     public void Shake(float intensity) {
         transform.position += new Vector3(Random.Range(-intensity, intensity), Random.Range(-intensity, intensity), 0);
@@ -25,5 +31,31 @@ public class CameraController : MonoBehaviour {
         shakeMax = max;
         shakeMin = min;
         shakeTime = maxShakeTime = time;
+    }
+
+    public void setMusicLevel(int level) {
+        // 0 - 0.20
+        // 0.55 - 0.81
+        // 0.90 - 1
+
+        Debug.Log(level);
+
+        switch (level)
+        {
+            case 0:
+                targetTransition = 0;
+                break;
+            case 1:
+                targetTransition = 0.21f;
+                break;
+            case 2:
+                targetTransition = 0.55f;
+                break;
+        }
+    }
+
+    public void resetMusic()
+    {
+        targetTransition = 0.91f;
     }
 }
