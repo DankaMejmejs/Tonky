@@ -38,7 +38,7 @@ public class Game : MonoBehaviour {
 
         Instantiate(_knug);
         _players = 0;
-        
+
 	}
 	
 	// Update is called once per frame
