@@ -99,6 +99,6 @@ public class Game : MonoBehaviour {
 
     public void Victory(int Player)
     {
-
+        Debug.Log(Player + " Won");
     }
 }
