@@ -37,7 +37,7 @@ public class Game : MonoBehaviour {
 
         Instantiate(_knug);
         _players = 0;
-        for (int i = 0; i < 3; i++)
+        for (int i = 0; i < 4; i++)
         {
             AddPlayer();
         }
