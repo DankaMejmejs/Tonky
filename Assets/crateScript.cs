@@ -4,6 +4,10 @@ using System.Collections;
 public class crateScript : MonoBehaviour {
 	private float size = 2f;
 
+    public GameObject explosionPrefab;
+
+    public float _damageFactor = 2;
+    public float _explosionDamage = 5;
 
 	// Use this for initialization
 	void Start () {
@@ -33,4 +37,18 @@ public class crateScript : MonoBehaviour {
 			transform.localScale = newSize;
 		}
 	}
+
+    void OnCollisionEnter2D(Collision2D collision)
+    {
+        Tonky tonky = collision.gameObject.GetComponent<Tonky>();
+
+        if (tonky != null)
+        {
+            GameObject g = Instantiate(explosionPrefab);
+            g.transform.position = transform.position;
+            tonky.Damage(Mathf.FloorToInt(Mathf.FloorToInt(GetComponent<Rigidbody2D>().velocity.magnitude) * _damageFactor), null);
+            tonky.Damage(Mathf.FloorToInt(_explosionDamage), null);
+            Destroy(gameObject);
+        }
+    }
 }

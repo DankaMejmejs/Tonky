@@ -49,13 +49,14 @@ public class ScoreTracker : MonoBehaviour {
         }
     }
 
-    public void AddScore(int amount, int player)
+    public int AddScore(int amount, int player)
     {
         _scores[player] += amount;
-        if(_scores[player] > _winAmount)
+        if(_scores[player] >= _winAmount)
         {
             Game.Instance.Victory(player);
         }
+        return _scores[player];
     }
 
 
