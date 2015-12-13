@@ -24,8 +24,11 @@ public class Tonky : MonoBehaviour {
     public AnimationCurve _turnCurve;
 
     private Material _material;
-    public Image _healthBar;
+    public GameObject _healthBar;
     private Material _healthBarMaterial;
+    public Vector2 _healtBarLimit = new Vector2(25, 80);
+
+    Vector3 up;
 
     public GameObject _theBay;
 
@@ -68,17 +71,20 @@ public class Tonky : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-        _healthBarMaterial.SetFloat("_Cutoff", 1 - ((float) _health / (float) _maxHealth));
+        float h = 1-((float)_health / (float)_maxHealth);
+        _healthBarMaterial.SetFloat("_Cutoff", h);
+
+        up = -transform.up;
 
         Vector3 vec = new Vector3(Input.GetAxis("Horizontal" + _playerId), -Input.GetAxis("Vertical" + _playerId),0);
-        Debug.DrawRay(transform.position, transform.up);
+        Debug.DrawRay(transform.position, up);
         Debug.DrawRay(transform.position, vec, Color.red);
 
-        Vector3 delta = vec - transform.up;
+        Vector3 delta = vec - up;
         float magnitude = delta.magnitude;
 
         float a1 = Mathf.Atan2(vec.y, vec.x);
-        float a2 = Mathf.Atan2(transform.up.y, transform.up.x);
+        float a2 = Mathf.Atan2(up.y, up.x);
         /*
         float a = 0;
         if (vec.sqrMagnitude > 0) {
@@ -100,14 +106,14 @@ public class Tonky : MonoBehaviour {
 
         if (magnitude < 1f)
         {
-            _rigidBody.AddForce((transform.up * 5f ) * vec.magnitude * (1.0f - magnitude));
+            _rigidBody.AddForce((up * 5f ) * vec.magnitude * (1.0f - magnitude));
         }
 
         //transform.Rotate(0, 0, Input.GetAxis("Horizontal" + _playerId));
 
         //_rigidBody.AddForce(transform.up * Input.GetAxis("Vertical" + _playerId));
 
-        _weapon.transform.position = transform.position + transform.up * 0.4f;
+        _weapon.transform.position = transform.position + up * 0.4f;
 
         if (Input.GetButton("Fire" + _playerId))
         {
@@ -116,7 +122,7 @@ public class Tonky : MonoBehaviour {
 
         else if (Input.GetButtonUp("Fire" + _playerId))
         {
-            _weapon.transform.up = transform.up;
+            _weapon.transform.up = up;
             _weapon.releaseFire();
         }
 	}
@@ -172,8 +178,8 @@ public class Tonky : MonoBehaviour {
         _material = Instantiate(transform.GetComponent<SpriteRenderer>().material);
         transform.GetComponent<SpriteRenderer>().material = _material;
 
-        _healthBarMaterial = Instantiate(_healthBar.material);
-        _healthBar.material = _healthBarMaterial;
+        _healthBarMaterial = Instantiate(_healthBar.GetComponent<SpriteRenderer>().material);
+        _healthBar.GetComponent<SpriteRenderer>().material = _healthBarMaterial;
     }
 
     public void setColor(Color color) {

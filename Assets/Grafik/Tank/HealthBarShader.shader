@@ -2,7 +2,7 @@
 {
 	Properties
 	{
-		[PerRendererData] _MainTex("Sprite Texture", 2D) = "white" {}
+		_MainTex("Sprite Texture", 2D) = "white" {}
 		_Color("Color", Color) = (1,1,1,1)
 		_Cutoff("Cutoff", Range(0, 1)) = 0
 		[MaterialToggle] PixelSnap("Pixel snap", Float) = 0
@@ -61,14 +61,14 @@
 
 			sampler2D _MainTex;
 			float _Cutoff;
+			float _UpperLimit;
+			float _LowerLimit;
 
 			fixed4 frag(v2f IN) : COLOR
 			{
 				float4 outCol = tex2D(_MainTex, IN.texcoord);
 				
-				float avg = (outCol.r + outCol.g + outCol.b) * 0.3;
-				float a = step(avg, _Cutoff);
-
+				float a = step(outCol.a, _Cutoff);
 				outCol = lerp(float4(0, 0, 0, 0), float4(0, 1, 0, 1), 1-a);
 				
 				return outCol * IN.color;
