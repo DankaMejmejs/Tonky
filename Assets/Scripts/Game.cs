@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
 using System.Collections;
+using System.Collections.Generic;
 using System.Linq;
 public class Game : MonoBehaviour {
 
@@ -12,7 +13,7 @@ public class Game : MonoBehaviour {
     public Sprite[] _playerSprites;
     public GameObject _pausemenu;
     
-    private int _players;
+    public int _players;
     private bool _pause = false;
 
     private static Game _instance = null;
@@ -37,8 +38,7 @@ public class Game : MonoBehaviour {
 	void Start () {
 
         Instantiate(_knug);
-        _players = 0;
-
+        //_players = 0;
 	}
 	
 	// Update is called once per frame
@@ -52,10 +52,11 @@ public class Game : MonoBehaviour {
     //Private function to add a player 
     private void AddPlayer()
     {
-        GameObject go = GameObject.Instantiate(_tonky);
+        GameObject go = Instantiate(_tonky);
         go.GetComponent<Tonky>()._playerId = _players;
         //go.transform.position = _spawnpoints[_players].transform.position;
         _players++;
+        Debug.Log(_players);
     }
 
     public void Pause()
@@ -92,9 +93,17 @@ public class Game : MonoBehaviour {
 
     public void Exit()
     {
-        Instantiate(_mainMenu);
+        Debug.Log("Exit" + Instance._players);
         Instance.Pause();
-        Destroy(this.gameObject);
+        for (int i = 0; i < Instance._players; i++)
+        {
+            Debug.Log("Kill tonky");
+            Destroy(GameObject.Find("Tonky(Clone)"));
+        }
+        Instantiate(_mainMenu);
+        Destroy(GameObject.Find("HUD(Clone)"));
+        Destroy(GameObject.Find("Knug of the hill(Clone)"));
+        Destroy(Instance.gameObject);
     }
 
     public void Victory(int Player)

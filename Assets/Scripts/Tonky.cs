@@ -64,6 +64,7 @@ public class Tonky : MonoBehaviour {
         // Weeaboopon
         _weapon = Instantiate(_weapon);
         _weapon.tonky = transform.gameObject;
+        _weapon.transform.parent = transform;
 
         instantiateMaterial();
         setColor(Color.white);
