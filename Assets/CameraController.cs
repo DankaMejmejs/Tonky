@@ -37,8 +37,7 @@ public class CameraController : MonoBehaviour {
         // 0 - 0.20
         // 0.55 - 0.81
         // 0.90 - 1
-
-        Debug.Log(level);
+        
 
         switch (level)
         {

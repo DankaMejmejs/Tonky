@@ -19,8 +19,11 @@ public class KnugOfTheHill : MonoBehaviour {
         _owner = null;
         _done = false;
 
+        FMOD.Studio.EventInstance e = FMOD_StudioSystem.instance.GetEvent("event:/Ui_Press_Start");
+        e.setVolume(1.5f);
+        e.start();
         Camera.main.GetComponent<CameraController>().setMusicLevel(1);
-	}
+    }
 	
 	// Update is called once per frame
 	void Update () {
