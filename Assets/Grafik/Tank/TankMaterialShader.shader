@@ -52,7 +52,7 @@
 			v2f vert(appdata_t IN)
 			{
 				v2f OUT;
-				OUT.masktexcoord = (IN.vertex + float2(0.323, 0.36)) * 1.55;
+				OUT.masktexcoord = (IN.vertex + float2(0.323, 0.37)) * 1.55;
 
 				OUT.vertex = mul(UNITY_MATRIX_MVP, IN.vertex);
 				OUT.texcoord = IN.texcoord;
@@ -70,7 +70,7 @@
 			fixed4 frag(v2f IN) : COLOR
 			{
 				float4 outCol = tex2D(_MainTex, IN.texcoord);
-				float4 maskCol = tex2D(_Mask, IN.masktexcoord);
+				float4 maskCol = tex2D(_Mask, IN.masktexcoord * float2(1, 1));
 
 				//outCol = lerp(outCol, _Color, maskCol.a);
 
