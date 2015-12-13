@@ -11,6 +11,7 @@ public class CameraController : MonoBehaviour {
     
 
     void Start () {
+		FMOD_StudioSystem.instance.PlayOneShot("event:/Music", Vector3.zero);
 	}
 	
 	void Update () {

@@ -33,6 +33,17 @@ public class ArmadilloScript : MonoBehaviour {
 			_animation.SetBool ("Rolling", false);	
 			_animation.SetBool ("Walking", true);
 		}
+
+		Vector3 checkPos = transform.position;
+		if (checkPos.x > _maxX + 2
+			|| checkPos.x < _minX - 2
+			|| checkPos.y > _maxY + 2
+			|| checkPos.y < _minY - 2) {
+			Vector3 newPos = new Vector3(0,0,0);
+			newPos.x = Random.Range (_minX,_maxX);
+			newPos.y = Random.Range (_minY, _maxY);
+			transform.position = newPos;
+		}
 	}
 
 	void randomDest()
