@@ -12,11 +12,12 @@ public class KnugOfTheHill : MonoBehaviour {
     public GameObject _owner;
     public List<GameObject> _inside;
     public GameObject _crown;
+    public bool _done;
    
 	// Use this for initialization
 	void Start () {
         _owner = null;
-
+        _done = false;
 	}
 	
 	// Update is called once per frame
@@ -24,9 +25,13 @@ public class KnugOfTheHill : MonoBehaviour {
         _timer += Time.deltaTime;
         if(_timer >= _scoreTime)
         {
-            if(_owner != null)
+            if(_owner != null && !_done)
             {
-                ScoreTracker.Instance.AddScore(1, _owner.GetComponent<Tonky>()._playerId);
+               int score = ScoreTracker.Instance.AddScore(1, _owner.GetComponent<Tonky>()._playerId);
+                if(score == ScoreTracker.Instance._winAmount)
+                {
+                    _done = true;
+                }
             }
 
             _timer = 0;

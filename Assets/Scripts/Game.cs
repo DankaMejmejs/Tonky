@@ -12,6 +12,7 @@ public class Game : MonoBehaviour {
     public GameObject[] _spawnpoints;
     public Sprite[] _playerSprites;
     public GameObject _pausemenu;
+    public GameObject _victory;
     
     public int _players;
     private bool _pause = false;
@@ -108,6 +109,7 @@ public class Game : MonoBehaviour {
 
     public void Victory(int Player)
     {
-        Debug.Log(Player + " Won");
+        GameObject go = Instantiate(_victory);
+        go.GetComponentsInChildren<Text>().FirstOrDefault(x => x.name == "Number").text = (Player + 1).ToString();
     }
 }
