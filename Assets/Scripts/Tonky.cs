@@ -174,6 +174,11 @@ public class Tonky : MonoBehaviour {
         // Skriv skit på skärm'n för fan
         Debug.Log("Ded");
 
+        FMOD_StudioSystem.instance.PlayOneShot("event:/Explosion_Big", Vector3.zero);
+        FMOD_StudioSystem.instance.PlayOneShot("event:/Explosion_Small", Vector3.zero);
+        FMOD_StudioSystem.instance.PlayOneShot("event:/Ui_KillingTank", Vector3.zero);
+
+
         Instantiate(_theBay, transform.position, transform.rotation);
         Destroy(gameObject);
     }
