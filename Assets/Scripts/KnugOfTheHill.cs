@@ -18,6 +18,8 @@ public class KnugOfTheHill : MonoBehaviour {
 	void Start () {
         _owner = null;
         _done = false;
+
+        Camera.main.GetComponent<CameraController>().setMusicLevel(1);
 	}
 	
 	// Update is called once per frame

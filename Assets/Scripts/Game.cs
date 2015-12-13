@@ -109,6 +109,8 @@ public class Game : MonoBehaviour {
 
     public void VictoryExit()
     {
+        Camera.main.GetComponent<CameraController>().resetMusic();
+
         for (int i = 0; i < Instance._players; i++)
         {
             Destroy(GameObject.Find("Tonky(Clone)"));
@@ -118,7 +120,6 @@ public class Game : MonoBehaviour {
         Destroy(GameObject.Find("Knug of the hill(Clone)"));
         Destroy(GameObject.Find("VictoryScreen(Clone)"));
         Destroy(Instance.gameObject);
-
     }
 
     public void Victory(int Player)
