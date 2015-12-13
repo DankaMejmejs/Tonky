@@ -62,7 +62,7 @@ public class CrateSpawner : MonoBehaviour {
 
 	void SpawnCrate()
 	{
-		FMOD_StudioSystem.instance.PlayOneShot("event:/Crate_Impact", Vector3.zero);
+		FMOD_StudioSystem.instance.PlayOneShot("event:/Ui_Crate_Spawn", Vector3.zero);
 		float maxSpawnLength = 1.0f;
 		float spawnDegree = Random.Range (0f, 360f);
 		Vector3 spawnPos = transform.position;
