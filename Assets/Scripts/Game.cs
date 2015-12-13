@@ -107,6 +107,20 @@ public class Game : MonoBehaviour {
         Destroy(Instance.gameObject);
     }
 
+    public void VictoryExit()
+    {
+        for (int i = 0; i < Instance._players; i++)
+        {
+            Destroy(GameObject.Find("Tonky(Clone)"));
+        }
+        Instantiate(_mainMenu);
+        Destroy(GameObject.Find("HUD(Clone)"));
+        Destroy(GameObject.Find("Knug of the hill(Clone)"));
+        Destroy(GameObject.Find("VictoryScreen(Clone)"));
+        Destroy(Instance.gameObject);
+
+    }
+
     public void Victory(int Player)
     {
         GameObject go = Instantiate(_victory);
