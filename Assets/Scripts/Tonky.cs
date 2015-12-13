@@ -1,4 +1,4 @@
-﻿﻿using UnityEngine;
+﻿using UnityEngine;
 using System.Collections;
 using UnityEngine.UI;
 
@@ -137,6 +137,12 @@ public class Tonky : MonoBehaviour {
         //Debug.Log(damageAmount_);
 
         // Skriv ut damage eller någon skit
+
+		if (damageAmount_ > 3) {
+			GameObject g = GameObject.FindGameObjectWithTag("Crowd");
+			g.GetComponent<CrowdScript>().startCheering();
+			FMOD_StudioSystem.instance.PlayOneShot("event:/Cheer_Short", Vector3.zero);
+		}
 
         if (_health <= 0)
         {
