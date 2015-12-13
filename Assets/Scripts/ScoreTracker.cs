@@ -32,10 +32,16 @@ public class ScoreTracker : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-	    for(int i = 0; i < _scores.Length; i++)
+        int highestScore = 0;
+        for (int i = 0; i < _scores.Length; i++)
         {
             _texts[i].text = _scores[i].ToString();
+            if (highestScore < _scores[i])
+                highestScore = _scores[i];
         }
+        
+        if (highestScore >= _winAmount * 0.80f)
+            Camera.main.GetComponent<CameraController>().setMusicLevel(2);
 	}
 
     public void Initiliaize(int amountOfPlayers)

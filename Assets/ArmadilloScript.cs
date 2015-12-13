@@ -13,6 +13,8 @@ public class ArmadilloScript : MonoBehaviour {
 	private float _maxY = 3.5f;
 	private float _minY = -3.5f;
 
+    bool rolling = false;
+
 	// Use this for initialization
 	void Start () {
 		_animation = GetComponent<Animator> ();
@@ -29,12 +31,26 @@ public class ArmadilloScript : MonoBehaviour {
 		if (GetComponent<Rigidbody2D> ().velocity.magnitude > 2) {
 			_animation.SetBool ("Rolling", true);	
 			_animation.SetBool ("Walking", false);
-		} else {
+
+            if (!rolling) {
+                //FMOD_StudioSystem.instance.PlayOneShot("event:/Armadillo_ChangeState", Vector3.zero);
+                FMOD.Studio.EventInstance e = FMOD_StudioSystem.instance.GetEvent("event:/Armadillo_ChangeState");
+                rolling = true;
+                e.setPitch(Random.Range(0.75f, 1.25f));
+                e.start();
+            }
+        }
+        else {
 			_animation.SetBool ("Rolling", false);	
 			_animation.SetBool ("Walking", true);
-		}
 
-		Vector3 checkPos = transform.position;
+            if (rolling) {
+                //FMOD_StudioSystem.instance.PlayOneShot("event:/Armadillo_ChangeState", Vector3.zero);
+                rolling = false;
+            }
+        }
+
+        Vector3 checkPos = transform.position;
 		if (checkPos.x > _maxX + 2
 			|| checkPos.x < _minX - 2
 			|| checkPos.y > _maxY + 2
