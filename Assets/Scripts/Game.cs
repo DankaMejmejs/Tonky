@@ -10,11 +10,11 @@ public class Game : MonoBehaviour {
     public GameObject _knug;
     public GameObject _mainMenu;
     public GameObject[] _spawnpoints;
-    public Sprite[] _playerSprites;
+    public Color[] _playerColors;
     public GameObject _pausemenu;
     public GameObject _victory;
     
-    public int _players;
+    public int _players = 0;
     private bool _pause = false;
 
     private static Game _instance = null;
@@ -53,8 +53,12 @@ public class Game : MonoBehaviour {
     //Private function to add a player 
     private void AddPlayer()
     {
+        Debug.Log("Amount of colors" + _playerColors.Length);
         GameObject go = Instantiate(_tonky);
         go.GetComponent<Tonky>()._playerId = _players;
+        Debug.Log(_playerColors[_players]);
+
+        go.GetComponent<Tonky>().GiveColor(_playerColors[_players]);
         //go.transform.position = _spawnpoints[_players].transform.position;
         _players++;
         Debug.Log(_players);
