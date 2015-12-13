@@ -27,6 +27,8 @@ public class Tonky : MonoBehaviour {
     public Image _healthBar;
     private Material _healthBarMaterial;
 
+    public GameObject _theBay;
+
 	// Use this for initialization
 	void Start () {
         instantiateMaterial();
@@ -161,6 +163,9 @@ public class Tonky : MonoBehaviour {
     {
         // Skriv skit på skärm'n för fan
         Debug.Log("Ded");
+
+        Instantiate(_theBay, transform.position, transform.rotation);
+        Destroy(gameObject);
     }
 
     private void instantiateMaterial() {
