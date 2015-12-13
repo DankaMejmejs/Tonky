@@ -40,6 +40,12 @@ public class crateScript : MonoBehaviour {
 
     void OnCollisionEnter2D(Collision2D collision)
     {
+        FMOD.Studio.EventInstance e = FMOD_StudioSystem.instance.GetEvent("event:/Crate_Impact");
+        e.setPitch(Random.Range(0.75f, 1.25f));
+        e.start();
+
+        //FMOD_StudioSystem.instance.PlayOneShot("event:/Crate_Impact", Vector3.zero);
+
         Tonky tonky = collision.gameObject.GetComponent<Tonky>();
 
         if (tonky != null)
