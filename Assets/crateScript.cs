@@ -6,6 +6,9 @@ public class crateScript : MonoBehaviour {
 
     public GameObject explosionPrefab;
 
+    public float _damageFactor = 2;
+    public float _explosionDamage = 5;
+
 	// Use this for initialization
 	void Start () {
 
@@ -43,6 +46,8 @@ public class crateScript : MonoBehaviour {
         {
             GameObject g = Instantiate(explosionPrefab);
             g.transform.position = transform.position;
+            tonky.Damage(Mathf.FloorToInt(Mathf.FloorToInt(GetComponent<Rigidbody2D>().velocity.magnitude) * _damageFactor), null);
+            tonky.Damage(Mathf.FloorToInt(_explosionDamage), null);
             Destroy(gameObject);
         }
     }
