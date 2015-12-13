@@ -46,7 +46,7 @@ public class MainMenu : MonoBehaviour {
                 _playersJoined[3] = true;
             }
 
-            if(Input.GetKeyDown(KeyCode.Joystick1Button7) && _playerCount > 0)
+            if(Input.GetKeyDown(KeyCode.JoystickButton7) && _playerCount > 0)
             {
                 Instantiate(_game).GetComponent<Game>().Init(_playerCount);
                 Destroy(this.gameObject);

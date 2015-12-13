@@ -6,7 +6,7 @@ public class ScoreTracker : MonoBehaviour {
 
     public int[] _scores;
     public Text[] _texts;
-    
+    public int _winAmount;
 
     private static ScoreTracker _instance = null;
 
@@ -52,6 +52,10 @@ public class ScoreTracker : MonoBehaviour {
     public void AddScore(int amount, int player)
     {
         _scores[player] += amount;
+        if(_scores[player] > _winAmount)
+        {
+            Game.Instance.Victory(player);
+        }
     }
 
 

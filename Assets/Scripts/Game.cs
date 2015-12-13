@@ -96,4 +96,9 @@ public class Game : MonoBehaviour {
         Instance.Pause();
         Destroy(this.gameObject);
     }
+
+    public void Victory(int Player)
+    {
+
+    }
 }
