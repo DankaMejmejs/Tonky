@@ -119,7 +119,7 @@ public class Tonky : MonoBehaviour {
 
         _health -= damageAmount_;
 
-        Debug.Log(damageAmount_);
+        //Debug.Log(damageAmount_);
 
         // Skriv ut damage eller någon skit
 
