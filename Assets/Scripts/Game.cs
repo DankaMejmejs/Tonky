@@ -7,6 +7,7 @@ public class Game : MonoBehaviour {
     public GameObject _tonky;
     public GameObject _hud;
     public GameObject _knug;
+    public GameObject _mainMenu;
     public GameObject[] _spawnpoints;
     public Sprite[] _playerSprites;
     public GameObject _pausemenu;
@@ -37,12 +38,7 @@ public class Game : MonoBehaviour {
 
         Instantiate(_knug);
         _players = 0;
-        for (int i = 0; i < 4; i++)
-        {
-            AddPlayer();
-        }
-        GameObject go = Instantiate(_hud);
-        go.GetComponent<ScoreTracker>().Initiliaize(_players);
+
 	}
 	
 	// Update is called once per frame
@@ -82,5 +78,27 @@ public class Game : MonoBehaviour {
     public void ButtonPause()
     {
         Instance.Pause();
+    }
+
+    public void Init(int players)
+    {
+        for (int i = 0; i < players; i++)
+        {
+            AddPlayer();
+        }
+        GameObject go = Instantiate(_hud);
+        go.GetComponent<ScoreTracker>().Initiliaize(_players);
+    }
+
+    public void Exit()
+    {
+        Instantiate(_mainMenu);
+        Instance.Pause();
+        Destroy(this.gameObject);
+    }
+
+    public void Victory(int Player)
+    {
+
     }
 }
