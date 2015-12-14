@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+﻿﻿using UnityEngine;
 using System.Collections;
 using UnityEngine.UI;
 
@@ -16,7 +16,7 @@ public class Tonky : MonoBehaviour {
 
     // Sprite
     private SpriteRenderer _spriteRenderer;
-    public Sprite[] _sprite;
+    public Sprite _sprite;
 
     // Jesper, kodar vapen på Höga-Berget...
     public Weapon _weapon;
@@ -31,9 +31,11 @@ public class Tonky : MonoBehaviour {
     Vector3 up;
 
     public GameObject _theBay;
+    private Color _color;
 
 	// Use this for initialization
 	void Start () {
+        Debug.Log("Start in tonky");
         instantiateMaterial();
         setColor(Color.white);
 
@@ -55,7 +57,7 @@ public class Tonky : MonoBehaviour {
         }
         else 
         {
-            _spriteRenderer.sprite = Game.Instance._playerSprites[_playerId];
+            _spriteRenderer.sprite = _sprite;
         }
 
         // Physics
@@ -66,8 +68,9 @@ public class Tonky : MonoBehaviour {
         _weapon.tonky = transform.gameObject;
         _weapon.transform.parent = transform;
 
-        instantiateMaterial();
-        setColor(Color.white);
+        //instantiateMaterial();
+        //setColor(Color.white);
+        setColor(_color);
     }
 	
 	// Update is called once per frame
@@ -138,11 +141,12 @@ public class Tonky : MonoBehaviour {
 
         // Skriv ut damage eller någon skit
 
-		if (damageAmount_ > 3) {
-			GameObject g = GameObject.FindGameObjectWithTag("Crowd");
-			g.GetComponent<CrowdScript>().startCheering();
-			FMOD_StudioSystem.instance.PlayOneShot("event:/Cheer_Short", Vector3.zero);
-		}
+        if (damageAmount_ > 3)
+        {
+            GameObject g = GameObject.FindGameObjectWithTag("Crowd");
+            g.GetComponent<CrowdScript>().startCheering();
+            FMOD_StudioSystem.instance.PlayOneShot("event:/Cheer_Short", Vector3.zero);
+        }
 
         if (_health <= 0)
         {
@@ -196,5 +200,10 @@ public class Tonky : MonoBehaviour {
 
     public void setColor(Color color) {
         _material.SetColor("_Color", color);
+    }
+
+    public void GiveColor(Color color)
+    {
+        _color = color;
     }
 }

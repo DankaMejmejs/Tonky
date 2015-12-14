@@ -21,17 +21,14 @@ public class CrowdScript : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-
-
-
 		if (!cheering)
 			return;
 		if (timer <= 0) {
-			crowd [currentIndex].GetComponent<PublikScript> ().cheer ();
+			crowd [currentIndex].GetComponent<PublikScript> ().cheer();
 			currentIndex++;
 			timer = 0.5f;
 
-			if (currentIndex > crowd.Count) {
+			if (currentIndex >= crowd.Count) {
 				currentIndex = 0;
 				cheering = false;
 			}

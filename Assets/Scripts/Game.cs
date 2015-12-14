@@ -59,7 +59,7 @@ public class Game : MonoBehaviour {
         Debug.Log(_playerColors[_players]);
 
         go.GetComponent<Tonky>().GiveColor(_playerColors[_players]);
-        //go.transform.position = _spawnpoints[_players].transform.position;
+        go.transform.position = _spawnpoints[_players].transform.position;
         _players++;
         Debug.Log(_players);
     }
@@ -100,11 +100,16 @@ public class Game : MonoBehaviour {
     {
         Debug.Log("Exit" + Instance._players);
         Instance.Pause();
+        GameObject[] gos = GameObject.FindGameObjectsWithTag("Tonk");
+        foreach (GameObject g in gos)
+            Destroy(g);
+        /*
         for (int i = 0; i < Instance._players; i++)
         {
             Debug.Log("Kill tonky");
             Destroy(GameObject.Find("Tonky(Clone)"));
         }
+        */
         Instantiate(_mainMenu);
         Destroy(GameObject.Find("HUD(Clone)"));
         Destroy(GameObject.Find("Knug of the hill(Clone)"));
@@ -115,10 +120,14 @@ public class Game : MonoBehaviour {
     {
         Camera.main.GetComponent<CameraController>().resetMusic();
 
+        GameObject[] gos = GameObject.FindGameObjectsWithTag("Tonk");
+        foreach (GameObject g in gos)
+            Destroy(g);
+        /*
         for (int i = 0; i < Instance._players; i++)
         {
             Destroy(GameObject.Find("Tonky(Clone)"));
-        }
+        }*/
         Instantiate(_mainMenu);
         Destroy(GameObject.Find("HUD(Clone)"));
         Destroy(GameObject.Find("Knug of the hill(Clone)"));
