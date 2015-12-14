@@ -33,11 +33,23 @@ public class Tonky : MonoBehaviour {
     public GameObject _theBay;
     private Color _color;
 
+    public GameObject _glow;
+
+    bool dead = false;
+    public float respawnTime = 3;
+    float respawnTimer = 0;
+
+    public Vector3 spawnPosition;
+
+    public Text _respawnText;
+
 	// Use this for initialization
 	void Start () {
         Debug.Log("Start in tonky");
         instantiateMaterial();
         setColor(Color.white);
+
+        respawnTimer = respawnTime;
 
         // Health
         _maxHealth = 100;
@@ -75,6 +87,28 @@ public class Tonky : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
+        if (dead)
+        {
+            respawnTimer -= Time.deltaTime;
+            _respawnText.transform.position = spawnPosition;
+            _respawnText.transform.rotation = Quaternion.Euler(new Vector3(0, 0, 0));
+            _respawnText.text = Mathf.CeilToInt(respawnTimer).ToString();
+            if (respawnTimer <= 0)
+            {
+                dead = false;
+                transform.position = spawnPosition;
+                RestoreMaxHealth();
+            }
+            return;
+        }
+        else
+        {
+            _respawnText.text = "";
+            respawnTimer = respawnTime;
+        }
+
+
+
         float h = 1-((float)_health / (float)_maxHealth);
         _healthBarMaterial.SetFloat("_Cutoff", h);
 
@@ -141,11 +175,10 @@ public class Tonky : MonoBehaviour {
 
         // Skriv ut damage eller någon skit
 
-        if (damageAmount_ > 3)
+        if (damageAmount_ > 20)
         {
             GameObject g = GameObject.FindGameObjectWithTag("Crowd");
             g.GetComponent<CrowdScript>().startCheering();
-            FMOD_StudioSystem.instance.PlayOneShot("event:/Cheer_Short", Vector3.zero);
         }
 
         if (_health <= 0)
@@ -187,7 +220,10 @@ public class Tonky : MonoBehaviour {
 
 
         Instantiate(_theBay, transform.position, transform.rotation);
-        Destroy(gameObject);
+        //Destroy(gameObject);
+
+        dead = true;
+        transform.position = new Vector3(-1000, -1000, 0);
     }
 
     private void instantiateMaterial() {
@@ -199,11 +235,13 @@ public class Tonky : MonoBehaviour {
     }
 
     public void setColor(Color color) {
-        _material.SetColor("_Color", color);
+        //_material.SetColor("_Color", color);
+        _glow.GetComponent<SpriteRenderer>().material.SetColor("_Color", color);
     }
 
     public void GiveColor(Color color)
     {
         _color = color;
+        _respawnText.color = color;
     }
 }

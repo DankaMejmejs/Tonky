@@ -60,6 +60,7 @@ public class Game : MonoBehaviour {
 
         go.GetComponent<Tonky>().GiveColor(_playerColors[_players]);
         go.transform.position = _spawnpoints[_players].transform.position;
+        go.GetComponent<Tonky>().spawnPosition = _spawnpoints[_players].transform.position;
         _players++;
         Debug.Log(_players);
     }
